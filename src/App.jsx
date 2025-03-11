@@ -1,11 +1,12 @@
-function App() {
-  const [count, setCount] = useState(0)
+import { RouterProvider } from "react-router";
+import router from "./routes";
 
-  return (
-    <>
-      <h1>Vite + React</h1>
-    </>
-  )
+function App() {
+  return <RouterProvider router={router}/>
 }
 
-export default App
+function Root() {
+  return <App />
+}
+
+export default Root
