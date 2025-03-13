@@ -8,7 +8,6 @@ const url = `https://api.rawg.io/api/games?key=${api_key}`;
 
 export default function Home() {
     const [games, setGames] = useState([]);
-
     useEffect(() => {
         const fetchData = async () => {
             try {

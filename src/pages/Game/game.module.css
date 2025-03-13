@@ -1,0 +1,126 @@
+.gameImageWrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.gameImage {
+    width: 100%;
+    object-fit: cover;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+}
+
+.gameImage:hover {
+    opacity: 0.5;
+}
+
+.gameTitle {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 70px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 10;
+    max-width: 100%;
+    padding-left: 30px;
+}
+
+.gameAttributes {
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin-top: 20px;
+    display: grid; /* Use grid for 2-column layout */
+    grid-template-columns: 2fr 1fr; /* Left column takes 1 fraction, right column takes 2 fractions */
+    gap: 20px;
+}
+
+.gameLeftColumn,
+.gameRightColumn {
+    display: flex;
+    flex-direction: column;
+}
+
+.attribute {
+    margin: 10px 0;
+}
+
+.releaseDate,
+.genres,
+.platforms,
+.metacritic,
+.description {
+    margin: 15px 0;
+    font-size: 18px;
+}
+.about {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 35px;
+    font-weight: 700;
+    color: #afc7ff;
+}
+
+.releaseDate,
+.metacritic {
+    font-weight: 500;
+}
+
+.genres {
+    font-weight: 400;
+    color: #555;
+}
+
+.platforms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+    size: 400px;
+}
+
+.platformItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 400;
+    color: #444;
+    background-color: #f0f0f0;
+    padding: 5px 10px;
+    border-radius: 20px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.platformItem:hover {
+    color: #fff;
+    background-color: #0073e6;
+}
+
+.platformItem svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+}
+
+.platformItem svg:hover {
+    transform: scale(1.1);
+}
+
+.metacritic {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff6f61;
+}
+
+.description {
+    color: #ffffffc9;
+    font-size: 16px;
+    font-weight: 400;
+    margin-top: 0;
+}

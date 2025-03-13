@@ -13,7 +13,6 @@
     width: 80%;
     display: flex;
     flex-direction: column;
-    padding: 1em;
 }
 
 .games {
@@ -26,7 +25,7 @@
 .research {
     width: 20%; 
     display: flex;
-    justify-content: flex-end; 
+    justify-content: flex-start; 
 }
 
 .header {
@@ -72,8 +71,13 @@
     text-transform: uppercase;
     font-size: 10px;
     font-weight: 600;
-    color: #3F79E6;
+    color: #afc7ff;
     padding: 8px 0;
+}
+
+.genre{
+    color: #afc7ff;
+    text-decoration: none;
 }
 
 .gameRead, p {
@@ -92,7 +96,7 @@
 }
 
 .detailsTitle {
-    color: #3F79E6;
+    color: #afc7ff;
     font-size: 13px;
     font-weight: 700;
 }
@@ -104,30 +108,47 @@
     font-size: 1rem;
 }
 
-.scroll {
-    height: 300px;
-    overflow-y: scroll;  
-    border-radius: 8px; 
-    padding: 10px;    
+.drop{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    color: #FFFFFF;
 }
 
-.scroll::-webkit-scrollbar {
-    width: 5px; 
+.drop {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    color: #afc7ff;
 }
 
-.scroll::-webkit-scrollbar-thumb {
-    background-color: #333C4E;  
-    border-radius: 4px; 
+.section {
+    font-size: 20px;
+    color: #afc7ff;
+    margin-bottom: 15px;
+    margin-top: 20px;
 }
 
-.scroll::-webkit-scrollbar-track {
-    background: #333c4e48; 
-    border-radius: 4px;  
+.links {
+    text-decoration: none;
+    color: #3D475C;
+    padding-top: 5px;
+    font-size: 18px;
+    padding-left: 30px;
 }
 
-.filters{
-    font-weight: 700 !important;
-    color: aquamarine;
+.links:hover {
+    color: #FFFFFF;
+}
+
+.list{
+    padding: 0;
+    margin: 0
+}
+
+.item{
+    padding: 0;
+    margin: 0;
 }
 
 @media (max-width: 1200px) {

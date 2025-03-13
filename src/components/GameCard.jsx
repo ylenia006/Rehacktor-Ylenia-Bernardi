@@ -14,10 +14,10 @@ export default function GameCard({ game }) {
     const metacritic = game.metacritic || 'N/A';
 
     return (
-        <article onMouseEnter={() => setHidden(false)} onMouseLeave={() => setHidden(true)}  onClick={() => navigate('/game/${game.id}/${game.name}')}  className={styles.gameCard}>
+        <article onMouseEnter={() => setHidden(false)} onMouseLeave={() => setHidden(true)}  onClick={() => navigate(`/game/${game.id}/${game.name}`)}  className={styles.gameCard}>
             <img src={game.background_image} alt={game.name} className={styles.gameImage} />
             <div className={styles.gameContent}>
-                <div className={styles.category}><a href={`/games/genre`}>{genres}</a></div>
+                <div className={styles.category}><a href={`/games/genre`} className={styles.genre}>{genres}</a></div>
                 <h6 className={styles.gameTitle}>{game.name}</h6>
                 <a className={styles.gameRead}>
                     {hidden && <p>Read More...</p>}
