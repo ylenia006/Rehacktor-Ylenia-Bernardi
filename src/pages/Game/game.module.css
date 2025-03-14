@@ -35,8 +35,8 @@
     color: #333;
     line-height: 1.6;
     margin-top: 20px;
-    display: grid; /* Use grid for 2-column layout */
-    grid-template-columns: 2fr 1fr; /* Left column takes 1 fraction, right column takes 2 fractions */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
     gap: 20px;
 }
 
@@ -63,7 +63,7 @@
     margin-bottom: 15px;
     font-size: 35px;
     font-weight: 700;
-    color: #afc7ff;
+    color: #0073e6;
 }
 
 .releaseDate,
@@ -91,9 +91,9 @@
     font-size: 14px;
     font-weight: 400;
     color: #444;
-    background-color: #f0f0f0;
     padding: 5px 10px;
     border-radius: 20px;
+    color: #fff;
     transition: color 0.3s ease, background-color 0.3s ease;
 }
 
@@ -123,4 +123,93 @@
     font-size: 16px;
     font-weight: 400;
     margin-top: 0;
+}
+
+.screenshotsContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.mainImageWrapper {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin-bottom: 0;
+    clear: both;
+}
+
+.mainScreenshot {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.screenshotGrid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    width: 100%;
+    max-width: 800px;
+}
+
+.screenshotItem {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.screenshotSmall {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.available{
+    color: #fff;
+    font-size: 20px;
+    padding-right: 5px;
+    margin-bottom: 0;
+}
+
+.gameTitle {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    font-size: 70px;
+    font-weight: 700;
+    color: #fff;
+    z-index: 10;
+    max-width: 100%;
+    padding-left: 30px;
+}
+
+.gameGenres {
+    display: block;
+    margin-top: 15px;
+    font-size: 20px;
+}
+
+.gameGenres .available {
+    font-weight: bold;
+}
+
+.gameGenres a {
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: 500;
+    margin-right: 5px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.gameGenres a:hover {
+    color: #5da8f3;
+    text-decoration: underline;
+}
+
+.gameGenres .genreLink {
+    display: inline;
 }

@@ -71,12 +71,12 @@
     text-transform: uppercase;
     font-size: 10px;
     font-weight: 600;
-    color: #afc7ff;
+    color: #0073e6;
     padding: 8px 0;
 }
 
 .genre{
-    color: #afc7ff;
+    color: #0073e6;
     text-decoration: none;
 }
 
@@ -96,7 +96,7 @@
 }
 
 .detailsTitle {
-    color: #afc7ff;
+    color: #0073e6;
     font-size: 13px;
     font-weight: 700;
 }
@@ -119,12 +119,12 @@
     display: flex;
     align-items: baseline;
     gap: 10px;
-    color: #afc7ff;
+    color: #0073e6;
 }
 
 .section {
     font-size: 20px;
-    color: #afc7ff;
+    color: #0073e6;
     margin-bottom: 15px;
     margin-top: 20px;
 }

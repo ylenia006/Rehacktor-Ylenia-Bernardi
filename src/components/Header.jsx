@@ -8,8 +8,8 @@ export default function Header() {
                 <li><strong>Rehacktor</strong></li>
             </ul>
             <ul>
-                <li><a href="#" className="contrast">Login</a></li>
-                <li><a href="#" className="contrast">Register</a></li>
+                <li><a href={`/login`} className="contrast">Login</a></li>
+                <li><a href={`/register`} className="contrast">Register</a></li>
             </ul>
         </nav>
     );
