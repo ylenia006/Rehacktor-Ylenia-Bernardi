@@ -4,22 +4,22 @@ import { useNavigate } from "react-router";
 import supabase from '../../supabase/client';
 
 
-export default function Signup() {
+export default function Login() {
 
     const navigate = useNavigate();
 
-    const handleSignup = async (event) => {
+    const handleSignin = async (event) => {
         event.preventDefault();
         const formRegister = event.currentTarget;
         const { user, email, password } = Object.fromEntries(new FormData(formRegister));
-        let {error} = await supabase.auth.signUp({
+        let {error} = await supabase.auth.signInWithPassword({
             email,
             password,
         });
         if (error) {
-            toast.error('La tua registrazione NON è andata a buon fine!');
+            toast.error('I campi inseriti non sono corretti.');
         } else {
-            toast.success('La tua registrazione è andata a buon fine!');
+            toast.success('Acesso eseguito con successo!');
             formRegister.reset();
             await new Promise((resolve) => setTimeout(resolve, 1000));
             navigate("/");
@@ -30,18 +30,17 @@ export default function Signup() {
     return (
         <div className={styles.main}>
             <div className={styles.formBox}>
-                <form className={styles.form} onSubmit={handleSignup}>
-                    <span className={styles.title}>Sign up</span>
-                    <span className={styles.subtitle}>Create a free account with your email.</span>
+                <form className={styles.form} onSubmit={handleSignin}>
+                    <span className={styles.title}>Login</span>
+                    <span className={styles.subtitle}>Please enter your credentials to access your account.</span>
                     <div className={styles.formContainer}>
-                        <input type="text" name='user' className={styles.input} placeholder="Username" />
                         <input type="email" name='email' className={styles.input} placeholder="Email" />
                         <input type="password"  name='password' className={styles.input} placeholder="Password" />
                     </div>
-                    <button>Sign up</button>
+                    <button>Login</button>
                 </form>
                 <div className={styles.formSection}>
-                    <p className={styles.account}>Have an account? <a href="/login">Log in</a></p>
+                    <p className={styles.account}>Don't have an account? <a href="/register">Sign Up</a></p>
                 </div>
                 <Toaster position="top-center"/>
             </div>
