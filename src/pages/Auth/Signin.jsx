@@ -34,8 +34,8 @@ export default function Login() {
                     <span className={styles.title}>Login</span>
                     <span className={styles.subtitle}>Please enter your credentials to access your account.</span>
                     <div className={styles.formContainer}>
-                        <input type="email" name='email' className={styles.input} placeholder="Email" />
-                        <input type="password"  name='password' className={styles.input} placeholder="Password" />
+                        <input type="email" name='email' required className={styles.input} placeholder="Email" />
+                        <input type="password"  name='password' required className={styles.input} placeholder="Password" />
                     </div>
                     <button>Login</button>
                 </form>

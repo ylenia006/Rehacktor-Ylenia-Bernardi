@@ -2,16 +2,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
-    overflow: hidden;
-    overflow-y: hidden;
+}
+
+.formBox {
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    box-sizing: border-box;
 }
 
 .form {
-    position: relative;
     display: flex;
     flex-direction: column;
-    padding: 32px 24px 24px;
     gap: 16px;
     text-align: center;
 }
@@ -34,6 +36,11 @@
     width: 100%;
     font-size: .9rem;
     padding: 8px 15px;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #0066ff;
 }
 
 .formSection {
@@ -64,12 +71,13 @@
     font-weight: 600;
     cursor: pointer;
     transition: background-color .3s ease;
+    margin-bottom: 15px;
 }
 
 .form button:hover {
     background-color: #005ce6;
 }
 
-.account{
+.account {
     color: #68789b;
 }
