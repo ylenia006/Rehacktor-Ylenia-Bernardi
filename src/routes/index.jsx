@@ -13,7 +13,7 @@ import Game from "../pages/Game";
 import Signup from "../pages/Auth/Signup";
 import Signin from "../pages/Auth/Signin";
 import Account from "../pages/Auth/Account";
-import { SessionContext } from "../context/SessionContextProvider";
+import SessionContext from "../context/SessionContext";
 
 export function ProtectedRoute() {
   const session = useContext(SessionContext);

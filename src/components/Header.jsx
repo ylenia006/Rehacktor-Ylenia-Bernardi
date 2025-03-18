@@ -1,13 +1,13 @@
 import { IoIosLogOut } from "react-icons/io";
 import { useContext } from "react";
-import {toast, Toaster} from 'sonner';
+import SessionContext from "../context/SessionContext";
+import { toast, Toaster } from 'sonner';
 import { Link, useNavigate } from "react-router";
 import styles from "../pages/Home/home.module.css";
 import supabase from "../supabase/client";
 import { FaUser } from "react-icons/fa";
 import { FaReact } from "react-icons/fa";
 import { IoIosSettings } from "react-icons/io";
-import { SessionContext } from "../context/SessionContextProvider";
 
 export default function Header() {
     const navigate = useNavigate();
@@ -20,14 +20,18 @@ export default function Header() {
         await new Promise((resolve) => setTimeout(resolve, 500));
         navigate("/");
     };
-    
+
     return (
         <nav className={styles.headerNav}>
             <ul className={styles.navLeft}>
                 <FaReact />
-                <li><strong>Rehacktor</strong></li>
+                <li>
+                    <Link to="/" style={{ textDecoration: "none", color: "#fff"}}>
+                        <strong>Rehacktor</strong>
+                    </Link>
+                </li>
             </ul>
-            <Toaster position="top-center"/>
+            <Toaster position="top-center" />
             <ul className={styles.navRight}>
                 {session ? (
                     <details className={styles.dropdown}>

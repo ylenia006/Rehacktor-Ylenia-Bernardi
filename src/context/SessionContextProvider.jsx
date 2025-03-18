@@ -1,7 +1,6 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import supabase from "../supabase/client";
-
-export const SessionContext = createContext(null);
+import SessionContext from './SessionContext';
 
 export default function SessionContextProvider({ children }) {
     const [session, setSession] = useState(null);
@@ -10,21 +9,20 @@ export default function SessionContextProvider({ children }) {
         const { data: { subscription } } = supabase.auth.onAuthStateChange(
             (event, session) => {
                 if (event === 'SIGNED_OUT') {
-                    setSession(null);
+                    setSession(null)
                 } else if (session) {
-                    setSession(session);
+                    setSession(session)
                 }
-            }
-        );
+            })
 
         return () => {
-            subscription.unsubscribe();
-        };
-    }, []); 
+            subscription.unsubscribe()
+        }
+    }, [])
 
     return (
         <SessionContext.Provider value={session}>
             {children}
         </SessionContext.Provider>
-    );
+    )
 }
