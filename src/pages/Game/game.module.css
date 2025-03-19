@@ -244,7 +244,7 @@
 }
 
 .commentsSection {
-    margin-top: 30px;
+    margin-top: 15px;
     /* border-top: solid white; */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -252,8 +252,9 @@
 
 .commentBox {
     background-color: #202632; 
-    width: 250px;
+    max-width: 250px;
     padding: 20px; 
+    margin-top: 15px;
     margin-bottom: 15px;
     border-radius: 20px; 
     text-align: left;
@@ -289,4 +290,36 @@
     color: #48536B;
     font-weight: 500;
     font-size: 13.6px;
+}
+
+.Rating {
+    display: inline-block;
+    margin-left: 10px; 
+    vertical-align: middle;
+}
+
+.starRating {
+    margin-top: 28px;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.starIcon {
+    cursor: pointer;
+    padding-right: 5px;
+    font-size: 26px;
+    transition: color 0.3s ease;
+}
+
+.emptyStar {
+    color: #ccc;
+}
+
+.filledStar {
+    color: #FFD700; 
+}
+
+.starIcon.saved {
+    color: #FFD700; 
 }

@@ -36,6 +36,8 @@ export default function Game() {
     const navigate = useNavigate();
     const [game, setGame] = useState(null);
     const [screenshots, setScreenshots] = useState([]);
+    const [showRating, setShowRating] = useState(false);
+    const [userRating, setUserRating] = useState(null);
     const [isFavorite, setIsFavorite] = useState(false);
     const [review, setReview] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -83,6 +85,25 @@ export default function Game() {
             toast.error('Errore nella lettura dei Preferiti');
         } else {
             setIsFavorite(favourites.length > 0);
+        }
+    };
+
+    const submitRating = async (rating) => {
+        const { error } = await supabase
+            .from('ratings')
+            .upsert([{
+                profile_id: session.user.id,
+                game_id: game.id,
+                game_name: game.name,
+                rating: rating
+            }]);
+
+        if (error) {
+            console.error('Error:', error);
+            toast.error('Errore nel salvataggio della valutazione');
+        } else {
+            setUserRating(rating);
+            toast.success(`Hai valutato ${game.name} con ${rating} stelle!`);
         }
     };
 
@@ -148,6 +169,19 @@ export default function Game() {
         }
     };
 
+    const fetchUserRating = async () => {
+        const { data, error } = await supabase
+            .from('ratings')
+            .select('rating')
+            .eq('profile_id', session.user.id)
+            .eq('game_id', game.id)
+            .single();
+
+        if (!error && data) {
+            setUserRating(data.rating);
+        }
+    };
+
     // Gestione ricerca gioco
     const handleSearch = (event) => {
         if (event.key === "Enter" && searchQuery.trim() !== "") {
@@ -164,6 +198,12 @@ export default function Game() {
         if (game) {
             readFav();
             fetchComments();
+        }
+    }, [game]);
+
+    useEffect(() => {
+        if (game) {
+            fetchUserRating();
         }
     }, [game]);
 
@@ -207,10 +247,25 @@ export default function Game() {
                                     <a className={style.IconsLink} onClick={() => removeFromFav(game)}><FaHeartBroken />Rimuovi dai Preferiti</a>
                                 )}
                                 <a className={style.IconsLink} onClick={() => setIsModalOpen(true)}><FaComments /> Lascia un commento</a>
-                                <a className={style.IconsLink}><FaStar /> Vota</a>
+                                {!showRating ? (
+                                    <a className={style.IconsLink} onClick={() => setShowRating(true)}><FaStar /> Vota</a>
+                                ) : (
+                                    <div className={style.Rating}>
+                                        <div className={style.starRating}>
+                                            {[1, 2, 3, 4, 5].map((star) => (
+                                                <FaStar
+                                                    key={star}
+                                                    className={`${userRating >= star ? style.filledStar : style.emptyStar} ${style.starIcon}`}
+                                                    onClick={() => submitRating(star)}
+                                                />
+                                            ))}
+                                        </div>
+                                    </div>
+                                )}
                             </>
                         )}
                     </div>
+
                     <div className={style.gameAttributes}>
                         <div className={style.gameRightColumn}>
                             <div className={style.attribute}>
@@ -281,7 +336,7 @@ export default function Game() {
                     </div>
                 </div>
             </section>
-            
+
             {/* Modal per commenti */}
             <Modal
                 isOpen={isModalOpen}
