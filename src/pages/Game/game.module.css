@@ -242,3 +242,51 @@
 .IconsLink:first-of-type {
     margin-left: 30px;
 }
+
+.commentsSection {
+    margin-top: 30px;
+    /* border-top: solid white; */
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+.commentBox {
+    background-color: #202632; 
+    width: 250px;
+    padding: 20px; 
+    margin-bottom: 15px;
+    border-radius: 20px; 
+    text-align: left;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    flex-direction: column;  /* Per mantenere gli elementi in colonna */
+    justify-content: center; /* Centra verticalmente */
+    align-items: center;    
+}
+
+.commentContent {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.commentContent h6 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.commentContent p {
+    color: #A5A8B8;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 8px 0;
+}
+
+.commentContent p:last-child {
+    font-style: italic;
+    color: #48536B;
+    font-weight: 500;
+    font-size: 13.6px;
+}

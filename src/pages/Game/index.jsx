@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router';
+import { useParams, useNavigate } from 'react-router';
 import styles from "../Home/Home.module.css";
 import style from "./game.module.css";
 import React from 'react';
@@ -8,6 +8,7 @@ import supabase from '../../supabase/client';
 import SessionContext from "../../context/SessionContext";
 import { FaStar, FaComments, FaHeart, FaHeartBroken } from 'react-icons/fa';
 import Sidebar from "../../components/Sidebar";
+import Modal from "../Game/components/ReviewModal.jsx";
 import { FaWindows, FaPlaystation, FaApple, FaAndroid, FaLinux, FaGlobe, FaXbox } from "react-icons/fa";
 import { SiNintendo, SiAtari, SiSega, SiCommodore } from "react-icons/si";
 
@@ -32,10 +33,14 @@ export default function Game() {
     const [searchQuery, setSearchQuery] = useState("");
     const session = useContext(SessionContext);
     const { id } = useParams();
+    const navigate = useNavigate();
     const [game, setGame] = useState(null);
     const [screenshots, setScreenshots] = useState([]);
     const [isFavorite, setIsFavorite] = useState(false);
+    const [review, setReview] = useState([]);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
+    // Aggiungi ai preferiti
     const addToFav = async (game) => {
         const { error } = await supabase
             .from('favourites')
@@ -50,6 +55,7 @@ export default function Game() {
         }
     };
 
+    // Rimuovi dai preferiti
     const removeFromFav = async (game) => {
         const { error } = await supabase
             .from('favourites')
@@ -65,6 +71,7 @@ export default function Game() {
         }
     };
 
+    // Leggi preferiti
     const readFav = async () => {
         const { data: favourites, error } = await supabase
             .from('favourites')
@@ -72,13 +79,56 @@ export default function Game() {
             .eq('profile_id', session.user.id)
             .eq('game_id', game.id);
 
-        if (favourites && favourites.length > 0) {
-            setIsFavorite(true);
-        } else if (error) {
+        if (error) {
             toast.error('Errore nella lettura dei Preferiti');
+        } else {
+            setIsFavorite(favourites.length > 0);
         }
     };
 
+    const handleFormSubmit = async ({ review_title, review_content }) => {
+        console.log("Titolo: " + review_title);
+        console.log("Contenuto: " + review_content);
+        const { data, error } = await supabase
+            .from("Comments")
+            .insert([{
+                profile_id: session.user.id,
+                game_id: game.id,
+                game_name: game.name,
+                review_title: review_title,
+                review_content: review_content,
+            }])
+            .select();
+
+        if (error) {
+            toast.error("Errore nell'inserimento della recensione");
+        } else {
+            setReview([...review, { ...data[0], profiles: { username: session.user.user_metadata.username } }]);
+            toast.success("Recensione aggiunta!");
+        }
+    };
+
+    // Recupero commenti
+    const fetchComments = async () => {
+        if (game) {
+            try {
+                const { data: reviews, error } = await supabase
+                    .from("Comments")
+                    .select("*, profiles(username)")
+                    .eq("game_id", game.id);
+
+                if (error) {
+                    toast.error("Errore nel caricamento dei commenti");
+                } else {
+                    setReview(reviews);
+                }
+            } catch (error) {
+                console.error("Errore nel caricamento dei commenti:", error);
+            }
+        }
+    };
+
+    // Recupero dati gioco
     const fetchGameData = async () => {
         try {
             const response = await fetch(`https://api.rawg.io/api/games/${id}?key=8bec836d4a3c4b2cb150e1d60bde20dd`);
@@ -94,26 +144,28 @@ export default function Game() {
                 setScreenshots(screenshotJson.results);
             }
         } catch (error) {
-            console.error("Errore nel caricamento del gioco:", error);
+            toast.error("Errore nel caricamento del gioco");
         }
     };
 
+    // Gestione ricerca gioco
     const handleSearch = (event) => {
         if (event.key === "Enter" && searchQuery.trim() !== "") {
             navigate(`/search?query=${searchQuery}`);
         }
     };
 
-
+    // Effettua il recupero dei dati del gioco e dei commenti
     useEffect(() => {
         fetchGameData();
     }, [id]);
 
     useEffect(() => {
-        if (session && game) {
+        if (game) {
             readFav();
+            fetchComments();
         }
-    }, [session, game]);
+    }, [game]);
 
     if (!game) {
         return <div>Caricamento...</div>;
@@ -132,7 +184,7 @@ export default function Game() {
                         <input
                             type="search"
                             name="search"
-                            placeholder="Search a game"
+                            placeholder="Cerca un gioco"
                             aria-label="Search"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
@@ -150,12 +202,12 @@ export default function Game() {
                         {session && (
                             <>
                                 {!isFavorite ? (
-                                    <a className={style.IconsLink} onClick={() => addToFav(game)}><FaHeart /> Add to Favourites</a>
+                                    <a className={style.IconsLink} onClick={() => addToFav(game)}><FaHeart /> Aggiungi ai Preferiti</a>
                                 ) : (
-                                    <a className={style.IconsLink} onClick={() => removeFromFav(game)}><FaHeartBroken />Remove from Favourites</a>
+                                    <a className={style.IconsLink} onClick={() => removeFromFav(game)}><FaHeartBroken />Rimuovi dai Preferiti</a>
                                 )}
-                                <a className={style.IconsLink}><FaComments /> Leave a comment</a>
-                                <a className={style.IconsLink}><FaStar /> Rate</a>
+                                <a className={style.IconsLink} onClick={() => setIsModalOpen(true)}><FaComments /> Lascia un commento</a>
+                                <a className={style.IconsLink}><FaStar /> Vota</a>
                             </>
                         )}
                     </div>
@@ -165,7 +217,7 @@ export default function Game() {
                                 <p className={style.description}>{game.description_raw}</p>
                             </div>
                             <div className={style.attribute}>
-                                <strong className={style.available}>Available on:</strong>
+                                <strong className={style.available}>Disponibile su:</strong>
                                 <div className={style.platforms}>
                                     {game.platforms?.map(({ platform }) => (
                                         <span key={platform.id} className={style.platformItem}>
@@ -187,7 +239,7 @@ export default function Game() {
                             </div>
 
                             <div className={style.gameGenres}>
-                                <strong className={style.available}>Genres:</strong>
+                                <strong className={style.available}>Generi:</strong>
                                 <span>
                                     {game.genres?.map((genre, index) => (
                                         <React.Fragment key={index}>
@@ -200,7 +252,7 @@ export default function Game() {
                                 </span>
                             </div>
                             <div className={style.attribute}>
-                                <strong className={style.available}>Released:</strong>
+                                <strong className={style.available}>Rilasciato:</strong>
                                 <span className={style.description}>{game.released}</span>
                             </div>
                             <div className={style.attribute}>
@@ -210,7 +262,34 @@ export default function Game() {
                         </div>
                     </div>
                 </div>
+
+                {/* Sezione commenti */}
+                <div>
+                    <strong className={style.available}>Commenti su <u>{game.name}</u></strong>
+                    <div className={style.commentsSection}>
+                        {review.length > 0 ? (
+                            review.map((rev) => (
+                                <div key={rev.id} className={style.commentBox}>
+                                    <div className={style.commentContent}>
+                                        <h6>{rev.review_title}</h6>
+                                        <p>{rev.review_content}</p>
+                                        <p>{rev.profiles.username}</p>
+                                    </div>
+                                </div>
+                            ))
+                        ) : (
+                            <div>Sii il primo a lasciare un commento!</div>
+                        )}
+                    </div>
+                </div>
             </section>
+
+            {/* Modal per commenti */}
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                onSubmit={handleFormSubmit}
+            />
         </div>
     );
 }
