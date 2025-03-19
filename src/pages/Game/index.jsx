@@ -226,6 +226,24 @@ export default function Game() {
                                     ))}
                                 </div>
                             </div>
+                            <div>
+                                <strong className={style.available}>Commenti su <u>{game.name}</u></strong>
+                                <div className={style.commentsSection}>
+                                    {review.length > 0 ? (
+                                        review.map((rev) => (
+                                            <div key={rev.id} className={style.commentBox}>
+                                                <div className={style.commentContent}>
+                                                    <h6>{rev.review_title}</h6>
+                                                    <p>{rev.review_content}</p>
+                                                    <p>{rev.profiles.username}</p>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div>Sii il primo a lasciare un commento!</div>
+                                    )}
+                                </div>
+                            </div>
                         </div>
                         <div className={style.gameLeftColumn}>
                             <div className={style.screenshotsContainer}>
@@ -262,28 +280,8 @@ export default function Game() {
                         </div>
                     </div>
                 </div>
-
-                {/* Sezione commenti */}
-                <div>
-                    <strong className={style.available}>Commenti su <u>{game.name}</u></strong>
-                    <div className={style.commentsSection}>
-                        {review.length > 0 ? (
-                            review.map((rev) => (
-                                <div key={rev.id} className={style.commentBox}>
-                                    <div className={style.commentContent}>
-                                        <h6>{rev.review_title}</h6>
-                                        <p>{rev.review_content}</p>
-                                        <p>{rev.profiles.username}</p>
-                                    </div>
-                                </div>
-                            ))
-                        ) : (
-                            <div>Sii il primo a lasciare un commento!</div>
-                        )}
-                    </div>
-                </div>
             </section>
-
+            
             {/* Modal per commenti */}
             <Modal
                 isOpen={isModalOpen}
