@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import styles from "../Home/Home.module.css";
-import GameCard from "../../components/gameCard";
+import GameCard from "../../components/GameCard";
 import Sidebar from "../../components/Sidebar";
 
 export default function Genre() {

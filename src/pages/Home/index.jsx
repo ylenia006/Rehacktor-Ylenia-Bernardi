@@ -1,16 +1,25 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router"; 
 import styles from "./home.module.css";
-import GameCard from "../../components/gameCard";
+import GameCard from "../../components/GameCard";
 import Sidebar from "../../components/Sidebar";
 
-const api_key = "8bec836d4a3c4b2cb150e1d60bde20dd";
-const url = `https://api.rawg.io/api/games?key=${api_key}`;
+const API_KEY = "8bec836d4a3c4b2cb150e1d60bde20dd";
 
 export default function Home() {
+    const [searchQuery, setSearchQuery] = useState(""); 
     const [games, setGames] = useState([]);
+    const navigate = useNavigate();
+    const handleSearch = (event) => {
+        if (event.key === "Enter" && searchQuery.trim() !== "") {
+            navigate(`/search?query=${searchQuery}`);
+        }
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
+                const url = `https://api.rawg.io/api/games?key=${API_KEY}&search=${searchQuery}`;
                 const response = await fetch(url);
                 if (!response.ok) {
                     throw new Error("Errore nel caricamento dei dati");
@@ -23,7 +32,7 @@ export default function Home() {
         };
 
         fetchData();
-    }, []);
+    }, [searchQuery]);
 
     return (
         <div className={styles.main}>
@@ -37,7 +46,15 @@ export default function Home() {
                         <p className={styles.subtitle}>Based on player counts and release date</p>
                     </div>
                     <div className={styles.research}>
-                        <input type="search" name="search" placeholder="Search a game" aria-label="Search" />
+                        <input 
+                            type="search" 
+                            name="search" 
+                            placeholder="Search a game" 
+                            aria-label="Search"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onKeyDown={handleSearch} 
+                        />
                     </div>
                 </div>
                 <div className={styles.gamesWrapper}>
