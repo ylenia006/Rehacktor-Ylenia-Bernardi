@@ -23,9 +23,11 @@ export default function LabTabs() {
         },
         '&.Mui-focusVisible': {
             backgroundColor: '#004d40',
+            borderRadius: '8px 8px 0 0', 
         },
         '&:hover': {
             backgroundColor: '#202632',
+            borderRadius: '8px 8px 0 0', 
         },
     });
 
@@ -36,10 +38,11 @@ export default function LabTabs() {
     return (
         <Box sx={{ width: '100%' }}>
             <TabContext value={value}>
-                <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <Box>
                     <TabList onChange={handleChange} aria-label="lab API tabs example">
                         <StyledTab label="Profile Settings" value="1" />
                         <StyledTab label="Favourites" value="2" />
+                        <StyledTab label="Comments" value="4" />
                         <StyledTab label="Reviews" value="3" />
                     </TabList>
                 </Box>
@@ -48,6 +51,9 @@ export default function LabTabs() {
                 </StyledTabPanel>
                 <StyledTabPanel value="2">
                     {/* <Favourites/> */}
+                </StyledTabPanel>
+                <StyledTabPanel value="4">
+                    {/* <Comments/> */}
                 </StyledTabPanel>
                 <StyledTabPanel value="3">
                     {/* <Reviews/> */}

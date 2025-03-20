@@ -9,6 +9,7 @@ import SessionContext from "../../context/SessionContext";
 import { FaStar, FaComments, FaHeart, FaHeartBroken } from 'react-icons/fa';
 import Sidebar from "../../components/Sidebar";
 import Modal from "../Game/components/ReviewModal.jsx";
+import Chat from "../Game/components/Chat.jsx";
 import { FaWindows, FaPlaystation, FaApple, FaAndroid, FaLinux, FaGlobe, FaXbox } from "react-icons/fa";
 import { SiNintendo, SiAtari, SiSega, SiCommodore } from "react-icons/si";
 
@@ -332,6 +333,9 @@ export default function Game() {
                                 <strong className={style.available}>Rating:</strong>
                                 <span className={style.description}>{game.rating} / 5</span>
                             </div>
+                            {session && (
+                                <Chat game={game} session={session}/>
+                            )}
                         </div>
                     </div>
                 </div>
