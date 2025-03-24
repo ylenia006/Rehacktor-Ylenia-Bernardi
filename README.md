@@ -1,10 +1,10 @@
-# Reahaktor
+# Rehacktor
 
 ## Descrizione
-Reahaktor è un'applicazione sviluppata con **React** che permette agli utenti di navigare tra una vasta libreria di giochi, cercare titoli specifici e visualizzarne i dettagli. L'app include filtri avanzati per genere e piattaforma, oltre a funzionalità interattive dedicate agli utenti registrati, come la gestione dei preferiti e una chat in tempo reale.
+Rehacktor è un'applicazione sviluppata con **React** che permette agli utenti di navigare tra una vasta libreria di giochi, cercare titoli specifici e visualizzarne i dettagli. L'app include filtri avanzati per genere e piattaforma, oltre a funzionalità interattive dedicate agli utenti registrati, come la gestione dei preferiti e una chat in tempo reale.
 
 ## API e Tecnologie
-Reahaktor si basa sulle seguenti tecnologie:
+Rehacktor si basa sulle seguenti tecnologie:
 - **[RAWG API](https://rawg.io/apidocs)** per ottenere dati aggiornati sui giochi.
 - **[Supabase](https://supabase.com/)** come Backend-as-a-Service (BaaS) per autenticazione e gestione del database.
 - **CSS Module**, **Material-UI** e **PicoCSS** per uno stile moderno e reattivo.
