@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import style from '../../Home/Home.module.css';
+import style from '../Home/Home.module.css';
 import GameCard from "../../components/GameCard";
 import Sidebar from "../../components/Sidebar";
 
