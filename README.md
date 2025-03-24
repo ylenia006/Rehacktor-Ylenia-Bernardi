@@ -16,7 +16,7 @@ Reahaktor si basa sulle seguenti tecnologie:
 - **Pagina Filtri per Piattaforma**: Mostra una griglia di giochi filtrati per piattaforma.
 - **Pagina Register**: Permette la registrazione di un nuovo utente.
 - **Pagina Login**: Permette l'accesso agli utenti già registrati.
-- **Pagina Account**: Mostra le informazioni personali dell'utente e la sua lista di giochi preferiti.
+- **Pagina Account**: Mostra le informazioni personali dell'utente, la sua lista di giochi preferiti e dei suoi commenti.
 
 ## Interazioni Utente
 ### Utenti Non Autenticati
@@ -28,12 +28,11 @@ Reahaktor si basa sulle seguenti tecnologie:
 
 ### Utenti Autenticati
 - Aggiornare le informazioni del proprio profilo.
-- Aggiungere e gestire la lista di giochi preferiti.
+- Aggiungere e rimuovere un gioco dai preferiti, commentare e valutare un gioco.
 - Chattare in tempo reale con altri utenti registrati.
 
 ## Gestione dello Stato con Context API
 - **Session Context**: Gestisce lo stato di autenticazione dell'utente.
-- **Favorite Context**: Gestisce la lista dei giochi preferiti.
 
 ## Deployment
 L'applicazione è disponibile online al seguente indirizzo:
