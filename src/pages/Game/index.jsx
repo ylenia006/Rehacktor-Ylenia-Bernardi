@@ -4,7 +4,7 @@ import styles from "../Home/home.module.css";
 import style from "./game.module.css";
 import React from 'react';
 import { toast, Toaster } from 'sonner';
-import supabase from '@/supabase/client';
+import supabase from '@supabase/client';
 import SessionContext from "@/context/SessionContext";
 import { FaStar, FaComments, FaHeart, FaHeartBroken } from 'react-icons/fa';
 import Sidebar from "@/components/Sidebar";
