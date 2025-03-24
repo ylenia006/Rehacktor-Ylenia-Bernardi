@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Favourites from './Favourites';
 import Comments from './Comments';
+import ProfileSettings from './ProfileSettings';
 import Tab from '@mui/material/Tab';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
 import { styled } from '@mui/system';
@@ -67,7 +68,7 @@ export default function LabTabs() {
                     </TabList>
                 </Box>
                 <StyledTabPanel value="1">
-                    {/* <ProfileSettings/> */}
+                    <ProfileSettings/>
                 </StyledTabPanel>
                 <StyledTabPanel value="2">
                     <Favourites/>

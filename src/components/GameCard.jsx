@@ -19,17 +19,7 @@ export default function GameCard({ game }) {
             <div className={styles.gameContent}>
                 <div className={styles.category}><a href={`/games/genre`} className={styles.genre}>{genres}</a></div>
                 <h6 className={styles.gameTitle}>{game.name}</h6>
-                <a className={styles.gameRead}>
-                    {hidden && <p>Read More...</p>}
-                    {!hidden && 
-                        <div className={styles.details}>
-                            <div><strong className={styles.detailsTitle}>Platforms:</strong> {platforms}</div>
-                            <div><strong className={styles.detailsTitle}>Released:</strong> {released}</div>
-                            <div><strong className={styles.detailsTitle}>Rating:</strong> {rating}</div>
-                            <div><strong className={styles.detailsTitle}>Metacritic Score:</strong> {metacritic}</div>
-                        </div>
-                    }
-                </a>
+                <a className={styles.gameRead}><p>Read More...</p></a>
             </div>
         </article>
     );

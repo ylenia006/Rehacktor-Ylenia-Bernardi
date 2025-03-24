@@ -41,7 +41,7 @@
 }
 
 .gamesWrapper {
-    column-count: 7;
+    column-count: 6;
 }
 
 .gameCard {
@@ -334,21 +334,21 @@ nav ul:first-child {
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
     max-width: 100%;
     min-width: 250px;
-    position: relative; /* Necessario per la posizione assoluta della data */
+    position: relative;
 }
 
 .commentGameName {
     font-size: 18px;
     font-weight: bold;
     color: #005ce6;
-    margin-bottom: 15px; /* Distanza tra il titolo del gioco e il titolo del commento */
+    margin-bottom: 15px; 
 }
 
 .commentTitle{
     font-size: 15px;
     font-weight: bold;
     color: #fff;
-    margin-bottom: 5px; /* Ridotto lo spazio tra titolo del commento e contenuto */
+    margin-bottom: 5px;
 }
 
 .commentContent {
@@ -365,3 +365,9 @@ nav ul:first-child {
     bottom: 10px;
     right: 10px;
 }
+
+.loading .endMessage{
+    margin-top: 15px;
+}
+
+

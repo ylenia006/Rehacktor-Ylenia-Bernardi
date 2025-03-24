@@ -1,5 +1,5 @@
 import { IoIosLogOut } from "react-icons/io";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import SessionContext from "../context/SessionContext";
 import { toast, Toaster } from 'sonner';
 import { Link, useNavigate } from "react-router";
@@ -12,7 +12,8 @@ import { IoIosSettings } from "react-icons/io";
 export default function Header() {
     const navigate = useNavigate();
     const session = useContext(SessionContext);
-    const username = session?.user?.user_metadata?.username || session?.user?.email || "User";
+    const [avatarUrl, setAvatarUrl] = useState(null);
+    const [username, setUsername] = useState(null);
 
     const signOut = async () => {
         await supabase.auth.signOut();
@@ -21,12 +22,50 @@ export default function Header() {
         navigate("/");
     };
 
+    useEffect(() => {
+        let ignore = false;
+        async function getProfile() {
+            if (!session?.user) return;
+            const { user } = session;
+            
+            const { data, error } = await supabase
+                .from('profiles')
+                .select('username, avatar_url')
+                .eq('id', user.id)
+                .single();
+
+            if (!ignore) {
+                if (error) {
+                    console.warn("Errore nel recupero del profilo:", error);
+                } else if (data) {
+                    setUsername(data.username || user.email);
+
+                    if (data.avatar_url) {
+                        const { data: publicUrlData } = supabase
+                            .storage
+                            .from("avatars")
+                            .getPublicUrl(data.avatar_url);
+
+                        setAvatarUrl(publicUrlData.publicUrl);
+                        console.log("Avatar URL:", publicUrlData.publicUrl);
+                    }
+                }
+            }
+        }
+
+        getProfile();
+
+        return () => {
+            ignore = true;
+        };
+    }, [session]);
+
     return (
         <nav className={styles.headerNav}>
             <ul className={styles.navLeft}>
                 <FaReact />
                 <li>
-                    <Link to="/" style={{ textDecoration: "none", color: "#fff"}}>
+                    <Link to="/" style={{ textDecoration: "none", color: "#fff" }}>
                         <strong>Rehacktor</strong>
                     </Link>
                 </li>
@@ -36,7 +75,17 @@ export default function Header() {
                 {session ? (
                     <details className={styles.dropdown}>
                         <summary className={styles.dropdownToggle}>
-                            <FaUser /> {username}
+                            {avatarUrl ? (
+                                <img
+                                    src={avatarUrl}
+                                    alt="Avatar"
+                                    className={styles.avatar}
+                                    style={{ width: 30, height: 30, borderRadius: '50%', marginRight: 8 }}
+                                />
+                            ) : (
+                                <FaUser style={{ marginRight: 8 }} />
+                            )}
+                            {username}
                         </summary>
                         <ul className={styles.dropdownMenu}>
                             <Link to="/account" className={styles.dropdownItem}>
