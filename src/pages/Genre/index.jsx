@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import styles from "../Home/Home.module.css";
+import style from '../../Home/Home.module.css';
 import GameCard from "../../components/GameCard";
 import Sidebar from "../../components/Sidebar";
 
@@ -22,25 +22,25 @@ export default function Genre() {
     const capitalizedGenre = genre.charAt(0).toUpperCase() + genre.slice(1);
 
     return (
-        <div className={styles.main}>
-            <aside className={styles.sidebar}>
+        <div className={style.main}>
+            <aside className={style.sidebar}>
                 <Sidebar />
             </aside>
-            <section className={styles.content}>
-                <div className={styles.games}>
+            <section className={style.content}>
+                <div className={style.games}>
                     <div>
                         <h1>{capitalizedGenre} Games</h1>
-                        <p className={styles.subtitle}>Based on player counts and release date</p>
+                        <p className={style.subtitle}>Based on player counts and release date</p>
                     </div>
-                    <div className={styles.research}>
+                    <div className={style.research}>
                         <input type="search" name="search" placeholder="Search a game" aria-label="Search" />
                     </div>
                 </div>
-                <div className={styles.gamesWrapper}>
+                <div className={style.gamesWrapper}>
                     {games.length > 0 ? (
                         games.map((game) => <GameCard key={game.id} game={game} />)
                     ) : (
-                        <p className={styles.loading}>Loading games...</p>
+                        <p className={style.loading}>Loading games...</p>
                     )}
                 </div>
             </section>

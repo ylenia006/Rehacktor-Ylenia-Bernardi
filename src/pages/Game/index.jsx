@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router';
-import styles from "../Home/Home.module.css";
+import styles from "../Home/home.module.css";
 import style from "./game.module.css";
 import React from 'react';
 import { toast, Toaster } from 'sonner';
