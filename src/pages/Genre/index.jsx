@@ -3,7 +3,6 @@ import { useParams } from 'react-router';
 import style from '@/Home/Home.module.css';
 import GameCard from "@/components/GameCard";
 import Sidebar from "@/components/Sidebar";
-import Sidebar from "@/components/Sidebar";
 
 export default function Genre() {
 
