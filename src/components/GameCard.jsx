@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import styles from "../pages/Home/Home.module.css";
+import styles from "../pages/Home/home.module.css";
 import { useState } from 'react';
 
 export default function GameCard({ game }) {

@@ -10,6 +10,8 @@ export default function Genre() {
     const { genre } = useParams();
 
     useEffect(() => {
+/*************  ✨ Codeium Command ⭐  *************/
+/******  e66df9ec-ce42-4b07-808f-d74599d188a1  *******/
         const fetchGenres = async () => {
             const response = await fetch(`https://api.rawg.io/api/games?key=8bec836d4a3c4b2cb150e1d60bde20dd&genres=${genre}`);
             const json = await response.json();
