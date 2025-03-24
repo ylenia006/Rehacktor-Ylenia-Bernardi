@@ -1,7 +1,7 @@
 import styles from './Signup.module.css';  
 import {toast, Toaster} from 'sonner';
 import { useNavigate } from "react-router";
-import supabase from '../../supabase/client';
+import supabase from '@/supabase/client';
 
 
 export default function Login() {

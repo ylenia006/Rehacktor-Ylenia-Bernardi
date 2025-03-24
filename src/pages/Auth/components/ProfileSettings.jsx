@@ -1,7 +1,7 @@
 import { useEffect, useState, useContext } from "react";
-import supabase from "../../../supabase/client";
+import supabase from "@/../supabase/client";
 import Avatar from "./Avatar";
-import SessionContext from "../../../context/SessionContext";
+import SessionContext from "@/../context/SessionContext";
 import styles from "../Signup.module.css";
 
 export default function ProfileSettings() {

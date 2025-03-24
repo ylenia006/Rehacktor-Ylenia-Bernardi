@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router"; 
 import InfiniteScroll from "react-infinite-scroll-component";
 import styles from "./home.module.css";
-import GameCard from "../../components/GameCard";
-import Sidebar from "../../components/Sidebar";
+import GameCard from "@/components/GameCard";
+import Sidebar from "@/components/Sidebar";
 
 const API_KEY = "8bec836d4a3c4b2cb150e1d60bde20dd";
 const PAGE_SIZE = 20; // RAWG.io di default restituisce 20 giochi per pagina

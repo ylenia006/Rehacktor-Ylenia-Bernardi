@@ -1,4 +1,4 @@
-import supabase from '../../../supabase/client';
+import supabase from '@/../supabase/client';
 import style from "../game.module.css";
 import { useEffect, useState, useRef } from "react";
 

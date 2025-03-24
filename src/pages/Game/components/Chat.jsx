@@ -1,7 +1,7 @@
 import RealtimeChat from "./RealtimeChat";
 import { toast } from 'sonner';
 import { IoIosSend } from "react-icons/io";
-import supabase from '../../../supabase/client';
+import supabase from '@/../supabase/client';
 import style from "../game.module.css";
 export default function Chat({ game, session }) {
     async function handleMessageSubmit(event) {

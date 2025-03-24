@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from "react";
-import supabase from "../../../supabase/client";
+import supabase from "@/../supabase/client";
 import { toast } from "sonner";
-import SessionContext from "../../../context/SessionContext";
-import style from "../../Home/home.module.css";
-import GameCard from "../../../components/GameCard";
+import SessionContext from "@/../context/SessionContext";
+import style from "@/Home/home.module.css";
+import GameCard from "@/../components/GameCard";
 
 export default function Favourites() {
     const session = useContext(SessionContext);

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import supabase from "../../../supabase/client";    
+import supabase from "@/supabase/client";    
 import styles from "../Signup.module.css";
 
 export default function Avatar({ url, size, onUpload }) {
