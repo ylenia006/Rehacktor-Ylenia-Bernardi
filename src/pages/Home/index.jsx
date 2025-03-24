@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router"; 
 import InfiniteScroll from "react-infinite-scroll-component";
 import styles from "./home.module.css";
-import Sidebar from "@components/Sidebar";
+import Sidebar from "@/components/Sidebar";
 import GameCard from "@components/GameCard";
 
 const API_KEY = "8bec836d4a3c4b2cb150e1d60bde20dd";
