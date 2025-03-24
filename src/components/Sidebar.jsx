@@ -3,7 +3,7 @@ import { GiConsoleController } from "react-icons/gi";
 import { FaCode } from "react-icons/fa6";
 import { BsFillStarFill } from "react-icons/bs";
 import { RiFileCopyFill } from "react-icons/ri";
-import styles from "../pages/Home/Home.module.css";
+import styles from "../pages/Home/home.module.css";
 
 const api_key = "8bec836d4a3c4b2cb150e1d60bde20dd";
 const genresUrl = `https://api.rawg.io/api/genres?key=${api_key}`;
