@@ -36,5 +36,5 @@ Rehacktor si basa sulle seguenti tecnologie:
 
 ## Deployment
 L'applicazione è disponibile online al seguente indirizzo:
-🔗 [Reahaktor Live](https://rehacktor-where-code-meets-the-game-7hedz6435.vercel.app/)
+🔗 [Reahaktor Live](https://rehacktor-where-code-meets-the-game.vercel.app)
 
