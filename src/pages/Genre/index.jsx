@@ -3,21 +3,40 @@ import { useParams } from 'react-router';
 import style from '../Home/home.module.css';
 import GameCard from "../../components/GameCard";
 import Sidebar from "../../components/Sidebar";
+import InfiniteScroll from "react-infinite-scroll-component"; 
+
+const API_KEY = "8bec836d4a3c4b2cb150e1d60bde20dd"; 
 
 export default function Genre() {
-
     const [games, setGames] = useState([]);
+    const [page, setPage] = useState(1); 
+    const [hasMore, setHasMore] = useState(true); 
+    const [isLoading, setIsLoading] = useState(false); 
     const { genre } = useParams();
 
-    useEffect(() => {
-/*************  ✨ Codeium Command ⭐  *************/
-/******  e66df9ec-ce42-4b07-808f-d74599d188a1  *******/
-        const fetchGenres = async () => {
-            const response = await fetch(`https://api.rawg.io/api/games?key=8bec836d4a3c4b2cb150e1d60bde20dd&genres=${genre}`);
+    const fetchGenres = async () => {
+        if (isLoading) return; 
+        setIsLoading(true);
+
+        try {
+            const url = `https://api.rawg.io/api/games?key=${API_KEY}&genres=${genre}&page=${page}`;
+            const response = await fetch(url);
             const json = await response.json();
-            console.log(json.results);
-            setGames(json.results);
-        };
+
+            if (json.results.length === 0) {
+                setHasMore(false);
+            }
+
+            setGames((prev) => [...prev, ...json.results]); 
+            setPage(page + 1); 
+        } catch (error) {
+            console.error("Errore nel fetching dei giochi:", error);
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    useEffect(() => {
         fetchGenres();
     }, [genre]);
 
@@ -38,13 +57,21 @@ export default function Genre() {
                         <input type="search" name="search" placeholder="Search a game" aria-label="Search" />
                     </div>
                 </div>
-                <div className={style.gamesWrapper}>
-                    {games.length > 0 ? (
-                        games.map((game) => <GameCard key={game.id} game={game} />)
-                    ) : (
-                        <p className={style.loading}>Loading games...</p>
-                    )}
-                </div>
+
+                <InfiniteScroll
+                    dataLength={games.length} 
+                    next={fetchGenres} 
+                    hasMore={hasMore} 
+                    endMessage={<p className={style.endMessage}>No more games to show.</p>} 
+                >
+                    <div className={style.gamesWrapper}>
+                        {games.length > 0 ? (
+                            games.map((game) => <GameCard key={game.id} game={game} />)
+                        ) : (
+                            <p className={style.loading}>Loading games...</p> 
+                        )}
+                    </div>
+                </InfiniteScroll>
             </section>
         </div>
     );

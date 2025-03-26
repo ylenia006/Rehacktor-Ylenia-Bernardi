@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router"; 
+import { useNavigate } from "react-router";
 import InfiniteScroll from "react-infinite-scroll-component";
 import styles from "./home.module.css";
 import GameCard from "../../components/GameCard";
+import SearchGame from "./components/SearchGame";
 import Sidebar from "../../components/Sidebar";
 
 const API_KEY = "8bec836d4a3c4b2cb150e1d60bde20dd";
-const PAGE_SIZE = 20; // RAWG.io di default restituisce 20 giochi per pagina
 
 export default function Home() {
     const [searchQuery, setSearchQuery] = useState(""); 
@@ -16,35 +16,31 @@ export default function Home() {
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
-    // Funzione per la ricerca
     const handleSearch = (event) => {
         if (event.key === "Enter" && searchQuery.trim() !== "") {
             navigate(`/search?query=${searchQuery}`);
         }
     };
 
-    // Funzione per caricare i giochi
     const fetchGames = async (reset = false) => {
-        if (isLoading) return; // Evita richieste duplicate
+        if (isLoading) return; 
         setIsLoading(true);
 
         try {
             const currentPage = reset ? 1 : page;
-            const url = `https://api.rawg.io/api/games?key=${API_KEY}&page=${currentPage}&page_size=${PAGE_SIZE}`;
+            const url = `https://api.rawg.io/api/games?key=${API_KEY}&page=${currentPage}`;
             const response = await fetch(url);
 
             if (!response.ok) throw new Error("Errore nel caricamento dei dati");
 
             const json = await response.json();
 
-            // Se non ci sono più giochi da caricare, disabilita infinite scroll
             if (json.results.length === 0) {
                 setHasMore(false);
                 setIsLoading(false);
                 return;
             }
 
-            // Se reset = true, sovrascrive la lista; altrimenti aggiunge alla fine
             setGames((prev) => (reset ? json.results : [...prev, ...json.results]));
             setPage(currentPage + 1);
         } catch (error) {
@@ -54,7 +50,6 @@ export default function Home() {
         }
     };
 
-    // Carica i giochi al primo render
     useEffect(() => {
         fetchGames(true);
     }, []);
@@ -70,16 +65,8 @@ export default function Home() {
                         <h1>New and Trending</h1>
                         <p className={styles.subtitle}>Based on player counts and release date</p>
                     </div>
-                    <div className={styles.research}>
-                        <input 
-                            type="search" 
-                            name="search" 
-                            placeholder="Search a game" 
-                            aria-label="Search"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            onKeyDown={handleSearch} 
-                        />
+                    <div className={styles.research}> 
+                        <SearchGame/>
                     </div>
                 </div>
 

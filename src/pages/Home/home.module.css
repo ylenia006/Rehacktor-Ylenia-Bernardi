@@ -370,4 +370,28 @@ nav ul:first-child {
     margin-top: 15px;
 }
 
+.searchInput {
+    border-radius: 50px;
+    padding: 10px 20px;
+    border-left: 2px solid #ccc; 
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
+    font-size: 16px;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 250px;
+}
 
+.submitButton {
+    background-color: #0066ff !important;
+    color: #fff !important;
+    text-align: center !important;
+    border-radius: 50px ;
+    padding: 10px 30px !important;
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    transition: background-color .3s ease !important;
+    margin-bottom: 15px !important;
+}
