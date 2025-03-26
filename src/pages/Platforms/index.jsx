@@ -2,16 +2,18 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import style from '../Home/home.module.css';
 import GameCard from "../../components/GameCard";
+import SearchGame from "../Home/components/SearchGame";
+import styles from "../Home/home.module.css";
 import Sidebar from "../../components/Sidebar";
-import InfiniteScroll from "react-infinite-scroll-component"; // Aggiunto InfiniteScroll
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const API_KEY = "8bec836d4a3c4b2cb150e1d60bde20dd"; // Aggiungi la chiave API se necessaria
+const API_KEY = "8bec836d4a3c4b2cb150e1d60bde20dd"; 
 
 export default function Platforms() {
     const [games, setGames] = useState([]);
-    const [page, setPage] = useState(1); // Stato per la paginazione
-    const [hasMore, setHasMore] = useState(true); // Stato per determinare se ci sono altri giochi
-    const [isLoading, setIsLoading] = useState(false); // Stato per il caricamento
+    const [page, setPage] = useState(1); 
+    const [hasMore, setHasMore] = useState(true); 
+    const [isLoading, setIsLoading] = useState(false);
     const { platform } = useParams();
 
     const platformIds = {
@@ -76,11 +78,11 @@ export default function Platforms() {
             const json = await response.json();
 
             if (json.results.length === 0) {
-                setHasMore(false); 
+                setHasMore(false);
             }
 
             setGames((prev) => [...prev, ...json.results]);
-            setPage(page + 1); 
+            setPage(page + 1);
         } catch (error) {
             console.error("Errore nel fetching dei giochi:", error);
         } finally {
@@ -89,8 +91,8 @@ export default function Platforms() {
     };
 
     useEffect(() => {
-        fetchGames(); 
-    }, [platform]); 
+        fetchGames();
+    }, [platform]);
 
     const capitalizedPlatform = platform.charAt(0).toUpperCase() + platform.slice(1);
 
@@ -105,15 +107,15 @@ export default function Platforms() {
                         <h1>{capitalizedPlatform} Games</h1>
                         <p className={style.subtitle}>Based on player counts and release date</p>
                     </div>
-                    <div className={style.research}>
-                        <input type="search" name="search" placeholder="Search a game" aria-label="Search" />
+                    <div className={styles.research}>
+                        <SearchGame />
                     </div>
                 </div>
 
                 <InfiniteScroll
                     dataLength={games.length}
                     next={fetchGames}
-                    hasMore={hasMore} 
+                    hasMore={hasMore}
                     endMessage={<p className={style.endMessage}>No more games to show.</p>}
                 >
                     <div className={style.gamesWrapper}>

@@ -15,8 +15,8 @@ export default function SearchGame(){
         }
     };
     return(
-        <form onSubmit={handleSearch}>
-            <fieldset role="group">
+        <form onSubmit={handleSearch} onKeyDown={(event) => event.key === "Enter" && handleSearch(event)}>
+            <fieldset role="group" > 
                 <input 
                 className={styles.searchInput}
                 type="text"

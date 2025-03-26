@@ -6,6 +6,7 @@ import React from 'react';
 import { toast, Toaster } from 'sonner';
 import supabase from '../../supabase/client';
 import SessionContext from "../../context/SessionContext";
+import SearchGame from "../Home/components/SearchGame";
 import { FaStar, FaComments, FaHeart, FaHeartBroken } from 'react-icons/fa';
 import Sidebar from "../../components/Sidebar";
 import Modal from "../Game/components/ReviewModal.jsx";
@@ -222,15 +223,7 @@ export default function Game() {
                 <div className={styles.games}>
                     <div></div>
                     <div className={styles.research}>
-                        <input
-                            type="search"
-                            name="search"
-                            placeholder="Cerca un gioco"
-                            aria-label="Search"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            onKeyDown={handleSearch}
-                        />
+                        <SearchGame />
                     </div>
                 </div>
                 <div className={style.gameDetails}>
@@ -334,7 +327,7 @@ export default function Game() {
                                 <span className={style.description}>{game.rating} / 5</span>
                             </div>
                             {session && (
-                                <Chat game={game} session={session}/>
+                                <Chat game={game} session={session} />
                             )}
                         </div>
                     </div>

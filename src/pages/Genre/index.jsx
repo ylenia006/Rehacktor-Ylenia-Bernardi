@@ -2,20 +2,21 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import style from '../Home/home.module.css';
 import GameCard from "../../components/GameCard";
+import SearchGame from "../Home/components/SearchGame";
 import Sidebar from "../../components/Sidebar";
-import InfiniteScroll from "react-infinite-scroll-component"; 
+import InfiniteScroll from "react-infinite-scroll-component";
 
-const API_KEY = "8bec836d4a3c4b2cb150e1d60bde20dd"; 
+const API_KEY = "8bec836d4a3c4b2cb150e1d60bde20dd";
 
 export default function Genre() {
     const [games, setGames] = useState([]);
-    const [page, setPage] = useState(1); 
-    const [hasMore, setHasMore] = useState(true); 
-    const [isLoading, setIsLoading] = useState(false); 
+    const [page, setPage] = useState(1);
+    const [hasMore, setHasMore] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
     const { genre } = useParams();
 
     const fetchGenres = async () => {
-        if (isLoading) return; 
+        if (isLoading) return;
         setIsLoading(true);
 
         try {
@@ -27,8 +28,8 @@ export default function Genre() {
                 setHasMore(false);
             }
 
-            setGames((prev) => [...prev, ...json.results]); 
-            setPage(page + 1); 
+            setGames((prev) => [...prev, ...json.results]);
+            setPage(page + 1);
         } catch (error) {
             console.error("Errore nel fetching dei giochi:", error);
         } finally {
@@ -54,21 +55,21 @@ export default function Genre() {
                         <p className={style.subtitle}>Based on player counts and release date</p>
                     </div>
                     <div className={style.research}>
-                        <input type="search" name="search" placeholder="Search a game" aria-label="Search" />
+                        <SearchGame />
                     </div>
                 </div>
 
                 <InfiniteScroll
-                    dataLength={games.length} 
-                    next={fetchGenres} 
-                    hasMore={hasMore} 
-                    endMessage={<p className={style.endMessage}>No more games to show.</p>} 
+                    dataLength={games.length}
+                    next={fetchGenres}
+                    hasMore={hasMore}
+                    endMessage={<p className={style.endMessage}>No more games to show.</p>}
                 >
                     <div className={style.gamesWrapper}>
                         {games.length > 0 ? (
                             games.map((game) => <GameCard key={game.id} game={game} />)
                         ) : (
-                            <p className={style.loading}>Loading games...</p> 
+                            <p className={style.loading}>Loading games...</p>
                         )}
                     </div>
                 </InfiniteScroll>
