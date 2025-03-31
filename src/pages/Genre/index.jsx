@@ -17,6 +17,7 @@ export default function Genre() {
 
     const fetchGenres = async () => {
         if (isLoading) return;
+        console.log(isLoading);
         setIsLoading(true);
 
         try {
