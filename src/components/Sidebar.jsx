@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { GiConsoleController } from "react-icons/gi";
 import { BsFillStarFill } from "react-icons/bs";
+import {Link} from "react-router";
 import styles from "../pages/Home/home.module.css";
 
 const api_key = "8bec836d4a3c4b2cb150e1d60bde20dd";
@@ -38,9 +39,9 @@ export default function Sidebar() {
                 <ul className={styles.list}>
                     {genres.map((genre) => (
                         <li key={genre.id} className={styles.item}>
-                            <a href={`/games/${genre.slug}`} className={styles.links}>
+                            <Link to={`/games/${genre.slug}`} className={styles.links}>
                                 {genre.name}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -54,9 +55,9 @@ export default function Sidebar() {
                 <ul className={styles.list}>
                     {platforms.map((platform) => (
                         <li key={platform.id} className={styles.item}>
-                            <a href={`/platforms/${platform.slug}`} className={styles.links}>
+                            <Link to={`/platforms/${platform.slug}`} className={styles.links}>
                                 {platform.name}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
